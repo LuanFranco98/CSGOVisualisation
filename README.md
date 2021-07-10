@@ -6,7 +6,7 @@ Visualisation on CS:GO competive and market
 
 ###Sobre a Análise do mercado:
 - [ ] Escolher quais visualizações usar e quais descartar na análise do mercado
-- [ ] Fazer um radar-chart com o primeiro ano dos adesivos do major que ja estão separados
+- [X] Fazer um radar-chart com o primeiro ano dos adesivos do major que ja estão separados
 - [ ] Fazer um heatmap onde a cor podia representar um de dois: ou a variação do dia anterior pro dia atual, ou a diferença entre a mediana e o preço no dia
 
 
