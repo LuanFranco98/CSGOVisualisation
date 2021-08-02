@@ -126,18 +126,17 @@ def fig01_median_price():
 
 def fig01_mean_volume():
     mean = [df_vol.iloc[i].mean() for i in range(len(df_vol))]
-    df_mean = pd.DataFrame(data = mean, columns=['price'], index = df_vol.index)
-    fig = px.line(df_mean, y = 'price', title = 'Media do volume de itens vendidos na data')
-    fig.write_html("figs_html/fig01_mean_price.html")
+    df_mean = pd.DataFrame(data = mean, columns=['vol'], index = df_vol.index)
+    fig = px.line(df_mean, y = 'vol', title = 'Media do volume de itens vendidos na data')
+    fig.write_html("figs_html/fig01_mean_vol.html")
     return
 
 def fig01_median_vol():
     median = [df_vol.iloc[i].median() for i in range(len(df_vol))]
-    df_median = pd.DataFrame(data = median, columns=['price'], index = df_vol.index)
-    fig = px.line(df_median, y = 'price', title = 'Mediana do volume de itens vendidos na data')
-    fig.write_html("figs_html/fig01_median_price.html")
+    df_median = pd.DataFrame(data = median, columns=['vol'], index = df_vol.index)
+    fig = px.line(df_median, y = 'vol', title = 'Mediana do volume de itens vendidos na data')
+    fig.write_html("figs_html/fig01_median_vol.html")
     return
-
 
 def slope_after_44days():
     slope = []
@@ -384,20 +383,20 @@ def fig09():
     fig.write_html("figs_html/fig09.html")
     return
 
-# fig01_mean_price()
-# fig01_median_price()
-# fig01_mean_volume()
-# fig01_median_vol()
+fig01_mean_price()
+fig01_median_price()
+fig01_mean_volume()
+fig01_median_vol()
 
-# fig02_mean()
-# fig02_median()
+fig02_mean()
+fig02_median()
 
-# fig03()
-# fig04()
-# fig05()
-# fig06()
-# fig07()
-# fig08_mean()
-# fig08_median()
+fig03()
+fig04()
+fig05()
+fig06()
+fig07()
+fig08_mean()
+fig08_median()
 fig09()
 
