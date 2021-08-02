@@ -138,6 +138,38 @@ def fig01_median_vol():
     fig.write_html("figs_html/fig01_median_vol.html")
     return
 
+def fig01_mean_price_7days():
+    mean = [df_price.iloc[i].mean() for i in range(len(df_price))]
+    mean = [np.sum(mean[i-7:i])/7 if i>6 else np.nan for i in range(len(mean))]
+    df_mean = pd.DataFrame(data = mean, columns=['price'], index = df_price.index)
+    fig = px.line(df_mean, y = 'price', title = 'Media dos preços dos itens vendidos na data')
+    fig.write_html("figs_html/fig01_mean_price_7days.html")
+    return
+
+def fig01_median_price_7days():
+    median = [df_price.iloc[i].median() for i in range(len(df_price))]
+    median = [np.sum(median[i-7:i])/7 if i>6 else np.nan for i in range(len(median))]
+    df_median = pd.DataFrame(data = median, columns=['price'], index = df_price.index)
+    fig = px.line(df_median, y = 'price', title = 'Mediana dos preços dos itens vendidos na data')
+    fig.write_html("figs_html/fig01_median_price_7days.html")
+    return
+
+def fig01_mean_volume_7days():
+    mean = [df_vol.iloc[i].mean() for i in range(len(df_vol))]
+    mean = [np.sum(mean[i-7:i])/7 if i>6 else np.nan for i in range(len(mean))]
+    df_mean = pd.DataFrame(data = mean, columns=['vol'], index = df_vol.index)
+    fig = px.line(df_mean, y = 'vol', title = 'Media do volume de itens vendidos na data')
+    fig.write_html("figs_html/fig01_mean_vol_7days.html")
+    return
+
+def fig01_median_vol_7days():
+    median = [df_vol.iloc[i].median() for i in range(len(df_vol))]
+    median = [np.sum(median[i-7:i])/7 if i>6 else np.nan for i in range(len(median))]
+    df_median = pd.DataFrame(data = median, columns=['vol'], index = df_vol.index)
+    fig = px.line(df_median, y = 'vol', title = 'Mediana do volume de itens vendidos na data')
+    fig.write_html("figs_html/fig01_median_vol_7days.html")
+    return
+
 def slope_after_44days():
     slope = []
     for i in range(len(df_overall_data)):
@@ -387,6 +419,10 @@ fig01_mean_price()
 fig01_median_price()
 fig01_mean_volume()
 fig01_median_vol()
+fig01_mean_price_7days()
+fig01_mean_volume_7days()
+fig01_median_price_7days()
+fig01_median_vol_7days()
 
 fig02_mean()
 fig02_median()
