@@ -7,7 +7,6 @@ from dateutil.relativedelta import relativedelta
 
 df_price = pd.read_pickle('data/marketPrice.pkl')
 df_vol = pd.read_pickle('data/marketVol.pkl')
-#df_delta = pd.read_pickle('data/marketDelta.pkl')
 df_overall_data = pd.read_pickle('data/marketData.pkl')
 
 
@@ -114,60 +113,60 @@ def fig01_mean_price():
     mean = [df_price.iloc[i].mean() for i in range(len(df_price))]
     df_mean = pd.DataFrame(data = mean, columns=['price'], index = df_price.index)
     fig = px.line(df_mean, y = 'price', title = 'Media dos preços dos itens vendidos na data')
-    fig.write_html("figs_html/fig01_mean_price.html")
+    fig.write_json("figs_json/fig01_mean_price.json")
     return
 
 def fig01_median_price():
     median = [df_price.iloc[i].median() for i in range(len(df_price))]
     df_median = pd.DataFrame(data = median, columns=['price'], index = df_price.index)
     fig = px.line(df_median, y = 'price', title = 'Mediana dos preços dos itens vendidos na data')
-    fig.write_html("figs_html/fig01_median_price.html")
+    fig.write_json("figs_json/fig01_median_price.json")
     return
 
 def fig01_mean_volume():
     mean = [df_vol.iloc[i].mean() for i in range(len(df_vol))]
     df_mean = pd.DataFrame(data = mean, columns=['vol'], index = df_vol.index)
     fig = px.line(df_mean, y = 'vol', title = 'Media do volume de itens vendidos na data')
-    fig.write_html("figs_html/fig01_mean_vol.html")
+    fig.write_json("figs_json/fig01_mean_vol.json")
     return
 
 def fig01_median_vol():
     median = [df_vol.iloc[i].median() for i in range(len(df_vol))]
     df_median = pd.DataFrame(data = median, columns=['vol'], index = df_vol.index)
-    fig = px.line(df_median, y = 'vol', title = 'Mediana do volume de itens vendidos na data')
-    fig.write_html("figs_html/fig01_median_vol.html")
+    fig = px.line(df_median, y = 'vol', title = 'Mediana móvel do volume de itens vendidos na data')
+    fig.write_json("figs_json/fig01_median_vol.json")
     return
 
 def fig01_mean_price_7days():
     mean = [df_price.iloc[i].mean() for i in range(len(df_price))]
     mean = [np.sum(mean[i-7:i])/7 if i>6 else np.nan for i in range(len(mean))]
     df_mean = pd.DataFrame(data = mean, columns=['price'], index = df_price.index)
-    fig = px.line(df_mean, y = 'price', title = 'Media dos preços dos itens vendidos na data')
-    fig.write_html("figs_html/fig01_mean_price_7days.html")
+    fig = px.line(df_mean, y = 'price', title = 'Media móvel dos preços dos itens vendidos na data')
+    fig.write_json("figs_json/fig01_mean_price_7days.json")
     return
 
 def fig01_median_price_7days():
     median = [df_price.iloc[i].median() for i in range(len(df_price))]
     median = [np.sum(median[i-7:i])/7 if i>6 else np.nan for i in range(len(median))]
     df_median = pd.DataFrame(data = median, columns=['price'], index = df_price.index)
-    fig = px.line(df_median, y = 'price', title = 'Mediana dos preços dos itens vendidos na data')
-    fig.write_html("figs_html/fig01_median_price_7days.html")
+    fig = px.line(df_median, y = 'price', title = 'Mediana móvel dos preços dos itens vendidos na data')
+    fig.write_json("figs_json/fig01_median_price_7days.json")
     return
 
 def fig01_mean_volume_7days():
     mean = [df_vol.iloc[i].mean() for i in range(len(df_vol))]
     mean = [np.sum(mean[i-7:i])/7 if i>6 else np.nan for i in range(len(mean))]
     df_mean = pd.DataFrame(data = mean, columns=['vol'], index = df_vol.index)
-    fig = px.line(df_mean, y = 'vol', title = 'Media do volume de itens vendidos na data')
-    fig.write_html("figs_html/fig01_mean_vol_7days.html")
+    fig = px.line(df_mean, y = 'vol', title = 'Media móvel do volume de itens vendidos na data')
+    fig.write_json("figs_json/fig01_mean_vol_7days.json")
     return
 
 def fig01_median_vol_7days():
     median = [df_vol.iloc[i].median() for i in range(len(df_vol))]
     median = [np.sum(median[i-7:i])/7 if i>6 else np.nan for i in range(len(median))]
     df_median = pd.DataFrame(data = median, columns=['vol'], index = df_vol.index)
-    fig = px.line(df_median, y = 'vol', title = 'Mediana do volume de itens vendidos na data')
-    fig.write_html("figs_html/fig01_median_vol_7days.html")
+    fig = px.line(df_median, y = 'vol', title = 'Mediana móvel do volume de itens vendidos na data')
+    fig.write_json("figs_json/fig01_median_vol_7days.json")
     return
 
 def slope_after_44days():
@@ -199,28 +198,28 @@ df_slope = slope_after_44days()
 def fig02_mean():
     slope = df_overall_data['slope'].groupby(df_overall_data['type']).mean().sort_values(ascending=False)
     fig = px.bar(slope, title="Média do Slope por grupo de items")
-    fig.write_html("figs_html/fig02_mean.html")
+    fig.write_json("figs_json/fig02_mean.json")
     return
 
 #mediana da inclinação da reta por grupo
 def fig02_median():
     slope = df_overall_data['slope'].groupby(df_overall_data['type']).median().sort_values(ascending=False)
     fig = px.bar(slope, title="Mediana do Slope por grupo de items")
-    fig.write_html("figs_html/fig02_median.html")
+    fig.write_json("figs_json/fig02_median.json")
     return
 
 #media da inclinação da reta por grupo
 def fig02_mean():
     slope = df_slope['slope'].groupby(df_slope['type']).mean().sort_values(ascending=False)
     fig = px.bar(slope, title="Média do Slope por grupo de items ignorando os primeiros 44 dias")
-    fig.write_html("figs_html/fig02_mean_44days.html")
+    fig.write_json("figs_json/fig02_mean_44days.json")
     return
 
 #mediana da inclinação da reta por grupo
 def fig02_median():
     slope = df_slope['slope'].groupby(df_slope['type']).median().sort_values(ascending=False)
     fig = px.bar(slope, title="Mediana do Slope por grupo de items ignorando os primeiros 44 dias")
-    fig.write_html("figs_html/fig02_median_44days.html")
+    fig.write_json("figs_json/fig02_median_44days.json")
     return
 
 #box plot todos os tipos de itens
@@ -235,7 +234,7 @@ def fig03():
     #ordenado pelo valro da mediana
     fig = px.box(df_overall_data, x = 'type', y='priceAvg', title ="Box plot dos preços por tipo de itens, y na escala logaritmica", category_orders={"type":order})
     fig.update_yaxes(type='log', dtick = 1)
-    fig.write_html("figs_html/fig03.html")
+    fig.write_json("figs_json/fig03.json")
     return
 
 #box plot das armas
@@ -251,7 +250,7 @@ def fig04():
     df_weapons = df_overall_data.loc[(df_overall_data['type'] == 'ars') | (df_overall_data['type'] == 'snipers') | (df_overall_data['type'] =='pistols') | (df_overall_data['type'] == 'smgs') | (df_overall_data['type'] == 'heavys')]
     fig = px.box(df_weapons, x = 'type', y='priceAvg',title="Box plot dos preços para as skins de armas", category_orders={"type":order})
     fig.update_yaxes(type='log', dtick = 1)
-    fig.write_html("figs_html/fig04.html")
+    fig.write_json("figs_json/fig04.json")
     return
 
 
@@ -279,7 +278,7 @@ def fig05():
     order = [w for w in sorted(medians, key=medians.get ,reverse = True)]
 
     fig = px.box(b, x = 'glove_type', y='priceAvg',title="Box plot dos preços para skins de luvas", category_orders={"glove_type":order})
-    fig.write_html("figs_html/fig05.html")
+    fig.write_json("figs_json/fig05.json")
     return
 
 #"Preço das caixas ao longo do tempo")
@@ -288,7 +287,7 @@ def fig06():
     df_cases = df_price[cases_columns]
 
     fig = px.line(df_cases, y = cases_columns, title="Preço das caixas ao longo do tempo")
-    fig.write_html("figs_html/fig06.html")
+    fig.write_json("figs_json/fig06.json")
     return
 
 #Preço dos adesivos Legends(Holo-Foil) ao longo do tempo")
@@ -297,7 +296,7 @@ legends_columns = [skin for skin in all_skins if 'Legends' in skin.split('|')[0]
                         '2020' not in skin.split('|')[0].lstrip().rstrip()]
 def fig07():
     fig = px.line(df_price, y = legends_columns ,title ="Preço dos adesivos Legends(Holo-Foil) ao longo do tempo")
-    fig.write_html("figs_html/fig07.html")
+    fig.write_json("figs_json/fig07.json")
     return
 
 
@@ -376,20 +375,20 @@ for j in range(len(df_overall_data)):
 
 #     fig = px.box(df_overall_data, x = 'type', y = '%gainOneYear', category_orders={"type":order})
 #     fig.update_yaxes(type='log', dtick = 1)
-#     fig.write_html("figs_html/fig08")
+#     fig.write_json("figs_json/fig08")
 #     return
 
 #"Média do %gainOneYear por grupo")
 def fig08_mean():
     gainOneYear = df_overall_data['%gainOneYear'].groupby(df_overall_data['type']).mean().sort_values(ascending=False)
     fig = px.bar(gainOneYear, title="Média do %gainOneYear por grupo")
-    fig.write_html("figs_html/fig08_mean.html")
+    fig.write_json("figs_json/fig08_mean.json")
     return
 
 def fig08_median():
     gainOneYear = df_overall_data['%gainOneYear'].groupby(df_overall_data['type']).median().sort_values(ascending=False)
     fig = px.bar(gainOneYear, title="Mediana do %gainOneYear por grupo")
-    fig.write_html("figs_html/fig08_median.html")
+    fig.write_json("figs_json/fig08_median.json")
     return
 
 df_legends = df_price[legends_columns]
@@ -412,7 +411,7 @@ def fig09():
             name = skin
         ))
     fig.update_layout(title="Radar chart dos preços dos adesivos" )
-    fig.write_html("figs_html/fig09.html")
+    fig.write_json("figs_json/fig09.json")
     return
 
 fig01_mean_price()
